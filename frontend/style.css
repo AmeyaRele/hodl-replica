@@ -155,6 +155,7 @@ table {
     border-spacing: 0 15px;
     border-radius: 10px;
     width: 100%;
+    margin: 15px;
 }
 
 th,
@@ -172,7 +173,7 @@ tr {
     font-weight: bold;
 }
 th {
-    color: #2c3e50;
+    color: #7b7d83;
     font-weight: bolder;
     background-color: #191d28;
 }

@@ -34,32 +34,6 @@
         </div>
     </div>
     <div id="tablecontent">
-        <table>
-            <tr>
-            <th>#</th>
-            <th>name</th>
-            <th>Last</th>
-            <th>Buy / Sell Price</th>
-            <th>volume</th>
-            <th>base_unit</th>
-            </tr>
-            <tr>
-                <td>this</td>
-                <td>this</td>
-                <td>this</td>
-                <td>this</td>
-                <td>this</td>
-                <td>this</td>
-            </tr>
-            <tr>
-                <td>this</td>
-                <td>this</td>
-                <td>this</td>
-                <td>this</td>
-                <td>this</td>
-                <td>this</td>
-            </tr>
-        </table>
     </div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
@@ -76,7 +50,6 @@
 						row.appendChild(headerCell);
 					}
           let ct=1;		
-					console.log(response);
           for(i=0; i<response.data.length;i++){
               row=table.insertRow(-1);
               let headerCell = document.createElement("td");
@@ -89,7 +62,7 @@
 							headerCell.innerHTML=response.data[i][1]["last"];
 							row.appendChild(headerCell);
 							headerCell = document.createElement("td");
-							headerCell.innerHTML=response.data[i][1]["buy"]+response.data[i][1]["sell"];
+							headerCell.innerHTML="₹ "+response.data[i][1]["buy"]+" / "+"₹ "+response.data[i][1]["sell"];
 							row.appendChild(headerCell);
 							headerCell = document.createElement("td");
 							headerCell.innerHTML=response.data[i][1]["volume"];
