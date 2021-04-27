@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>HODLInfo</title>
+</head>
+<body>
+    <div id="header">
+        <img id="logo" src="hodl.png">
+        <div id="dropdowns">
+            <div class="select">
+                <select name="slct" id="slct">
+                <option selected>INR</option>
+                <option value="1">BTC</option>
+                </select>
+            </div>
+            <div class="select">
+                <select name="slct" id="slct">
+                <option selected>BTC</option>
+                <option value="1">INR</option>
+                </select>
+            </div>
+        </div>
+        <div id="rightheader">
+            <img id="circular" src="58.png">
+            <button>Connect telegram</button>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </div>
+    <div id="tablecontent">
+        <table>
+            <tr>
+            <th>#</th>
+            <th>name</th>
+            <th>Last</th>
+            <th>Buy / Sell Price</th>
+            <th>volume</th>
+            <th>base_unit</th>
+            </tr>
+            <tr>
+                <td>this</td>
+                <td>this</td>
+                <td>this</td>
+                <td>this</td>
+                <td>this</td>
+                <td>this</td>
+            </tr>
+            <tr>
+                <td>this</td>
+                <td>this</td>
+                <td>this</td>
+                <td>this</td>
+                <td>this</td>
+                <td>this</td>
+            </tr>
+        </table>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        document.getElementById('tablecontent').innerHTML="<div class=\"loader\"></div>"
+      axios
+        .get("http://localhost:8000/api/wazirx")
+        .then(response => {
+          let table=document.createElement("table");
+          let row=table.insertRow(0);
+					let info=["#","name","Last","Buy / Sell Price","volume","base_unit"];
+					for(index = 0; index < info.length; index++){
+						let headerCell = document.createElement("TH");
+						headerCell.innerHTML = info[index];
+						row.appendChild(headerCell);
+					}
+          let ct=1;		
+					console.log(response);
+          for(i=0; i<response.data.length;i++){
+              row=table.insertRow(-1);
+              let headerCell = document.createElement("td");
+							headerCell.innerHTML =i+1;
+							row.appendChild(headerCell);
+							headerCell = document.createElement("td");
+							headerCell.innerHTML=response.data[i][1]["name"];
+							row.appendChild(headerCell);
+							headerCell = document.createElement("td");
+							headerCell.innerHTML=response.data[i][1]["last"];
+							row.appendChild(headerCell);
+							headerCell = document.createElement("td");
+							headerCell.innerHTML=response.data[i][1]["buy"]+response.data[i][1]["sell"];
+							row.appendChild(headerCell);
+							headerCell = document.createElement("td");
+							headerCell.innerHTML=response.data[i][1]["volume"];
+							row.appendChild(headerCell);
+							headerCell = document.createElement("td");
+							headerCell.innerHTML=response.data[i][1]["base_unit"];
+							row.appendChild(headerCell);
+          }
+          let tablecontent=document.getElementById("tablecontent");
+					document.getElementById('tablecontent').innerHTML="";
+          tablecontent.appendChild(table);
+        })
+        .catch(error => console.error(error));
+    </script>
+    
+
+    <!-- <script type="text/javascript">
+    const url = 'https://api.wazirx.com/api/v2/tickers';
+    fetch(url)
+    .then((resp) => resp.json())
+    .then(function(data) {
+    console.log(data);
+    })
+    .catch(function(error) {
+    console.log(error);
+    });
+    </script> -->
+</body>
+</html>
